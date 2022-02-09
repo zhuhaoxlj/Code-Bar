@@ -1,6 +1,7 @@
 package view;
 
 import Snippets.CodeSnippets;
+import net.sf.json.JSONArray;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
@@ -20,6 +21,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.util.jar.JarEntry;
 
 
 public class HomeView extends JFrame implements ActionListener, DocumentListener {
@@ -28,6 +30,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
     private int xx;
     private int yy;
     private boolean isHideOnTray = false;
+    // 左边代码片段分组列表
     public static List<String> groupNameList;
     public static JLabel windowFrame;
     public static HomeView homeView;
@@ -36,7 +39,8 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
     public static List<CodeSnippets> selectedGroupSnippets;
     public static JLabel title;
     public static JLabel languageText;
-
+    // 要删除的 CodeSnippets ID
+    public static int toDeleteID = -1;
     private File file;
     public boolean changed = false;
     private boolean toolBarEnable = true;
@@ -410,6 +414,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
                 super.mouseEntered(e);
                 Icon allSnippetsIconSelected = new ImageIcon(Objects.requireNonNull(ResourcesUtils.getResource("/img/allsnippetsSelected.png", "allsnippetsSelected", ".png")).getAbsolutePath());
                 allSnippets.setIcon(allSnippetsIconSelected);
+                GlobalKeyListener.nowShowList = GlobalKeyListener.loadList;
             }
 
             @Override
@@ -501,6 +506,37 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         rightPart.setIcon(rightPartIcon);
         rightPart.setBounds(494, 61, 706, 619);
 
+        // 删除按钮
+        JLabel delete = new JLabel();
+        Icon deleteIcon = new ImageIcon(Objects.requireNonNull(ResourcesUtils.getResource("/img/deleteIcon.png", "right", ".png")).getAbsolutePath());
+        delete.setIcon(deleteIcon);
+        delete.setBounds(519, 15, 33, 33);
+        delete.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                List<CodeSnippets> temp = GlobalKeyListener.loadList;
+                CodeSnippets toDeleteEntity = new CodeSnippets();
+                for (CodeSnippets codeSnippets : temp) {
+                    if (codeSnippets.getId() == toDeleteID) {
+                        toDeleteEntity = codeSnippets;
+                    }
+                }
+                System.out.println(toDeleteEntity.getDescription());
+                temp.remove(toDeleteEntity);
+                System.out.println(temp.size());
+                GlobalKeyListener.loadList = temp;
+                System.out.println(temp.size());
+                HomeView.updateCenterListView(HomeView.groupListView.jList.getSelectedIndex());
+                // 更新左侧分组列表
+                updateGroupListView();
+                // 更新本地文件
+                writeJSON2Loacl(listToJSONStr(temp), "./CodeSnippets.json");
+            }
+        });
+        rightPart.add(delete);
+
+
         // 代码高亮模块
         JLabel codeFiled = new JLabel();
         Icon codeFiledIcon = new ImageIcon(Objects.requireNonNull(ResourcesUtils.getResource("/img/codeFiled.png", "right", ".png")).getAbsolutePath());
@@ -508,7 +544,6 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         codeFiled.setBounds(26, 70, 658, 520);
         sp.setBounds(0, 0, 658, 520);
         codeFiled.add(sp);
-
         rightPart.add(codeFiled);
         // 代码文件图标
         JLabel code = new JLabel();
@@ -527,7 +562,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         Icon languageIcon = new ImageIcon(Objects.requireNonNull(ResourcesUtils.getResource("/img/codeType.png", "right", ".png")).getAbsolutePath());
         language.setIcon(languageIcon);
         language.setBounds(571, 17, 70, 29);
-        languageText = new JLabel("", JLabel.CENTER);
+        languageText = new JLabel("未配置", JLabel.CENTER);
         languageText.setBounds(0, 6, 70, 16);
         languageText.setForeground(new Color(52, 174, 123));
         languageText.setFont(new Font("黑体", Font.PLAIN, 16));
@@ -725,6 +760,9 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         this.setVisible(true);
     }
 
+    public String listToJSONStr(List<CodeSnippets> codeSnippetsList) {
+        return JSONArray.fromObject(codeSnippetsList).toString();
+    }
 
     void writetofile(File ff) throws Exception {
         FileWriter fw = new FileWriter(ff.getAbsoluteFile());
@@ -785,6 +823,34 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         status.setText("行: " + linenumber + " 列: " + columnnumber);
     }
 
+    /**
+     * 把 JSON 字符串写入本地
+     *
+     * @param jsonText
+     * @param filePath
+     */
+    public void writeJSON2Loacl(String jsonText, String filePath) {
+        try {
+            File file = new File(filePath);
+            // 创建上级目录
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
+            // 如果文件存在，则删除文件
+            if (file.exists()) {
+                file.delete();
+            }
+            // 创建文件
+            file.createNewFile();
+            // 写入文件
+            Writer write = new OutputStreamWriter(new FileOutputStream(file), "GBK");
+            write.write(jsonText);
+            write.flush();
+            write.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 更新代码文本信息
@@ -817,6 +883,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
      * 更新中间的list
      */
     public static void updateCenterListView(int groupIndex) {
+        // 分组展示的数组
         List<CodeSnippets> codeSnippetsList = new ArrayList<>();
         if (groupIndex == -1) {
             DefaultListModel<CodeSnippets> jListModel = new DefaultListModel<>();
@@ -839,13 +906,28 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
             }
             centerCardList.jList.setModel(jListModel);
             numberOfSnippets.setText(codeSnippetsList.size() + "个片段");
+            GlobalKeyListener.nowShowList = codeSnippetsList;
         }
+    }
+
+    /**
+     * 更新左边分组的list
+     */
+    public static void updateGroupListView() {
+        initGroupsOfCodeSnippets();
+        // 分组展示的数组
+        List<String> groupList = groupNameList;
+        DefaultListModel<String> jListModel = new DefaultListModel<>();
+        for (String temp : groupList) {
+            jListModel.addElement(temp);
+        }
+        groupListView.jList.setModel(jListModel);
     }
 
     /**
      * 获取代码片段分组
      */
-    public void initGroupsOfCodeSnippets() {
+    public static void initGroupsOfCodeSnippets() {
         Set<String> tempSet = new HashSet<>();
         for (CodeSnippets temp : GlobalKeyListener.loadList) {
             String group = temp.getGroup();

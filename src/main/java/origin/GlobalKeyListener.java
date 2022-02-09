@@ -18,6 +18,7 @@ public class GlobalKeyListener {
     private Robot robot;
     private HotkeyListener hotkeyListener;
     public static List<CodeSnippets> loadList;
+    public static List<CodeSnippets> nowShowList;
 
     public GlobalKeyListener() {
         loadList = new ArrayList<>();
@@ -31,12 +32,12 @@ public class GlobalKeyListener {
         this.addKey();
         this.addKeyEvent();
         loadList = convertJSON2CodeSnippets(readFile2String("./CodeSnippets.json"));
+        nowShowList = loadList;
     }
 
     public List<CodeSnippets> jsonStrToList(String jsonString) {
         JSONArray jsonArray = JSONArray.fromObject(jsonString);
-        List<CodeSnippets> codeSnippetsList = JSONArray.toList(jsonArray, CodeSnippets.class);
-        return codeSnippetsList;
+        return (List<CodeSnippets>) JSONArray.toList(jsonArray, CodeSnippets.class);
     }
 
     public ArrayList<CodeSnippets> convertJSON2CodeSnippets(String jsonContent) {

@@ -9,6 +9,15 @@ public class CodeSnippets {
     private String languageType;
     private String group;
     private ImageIcon prefixIcon;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public ImageIcon getPrefixIcon() {
         return prefixIcon;

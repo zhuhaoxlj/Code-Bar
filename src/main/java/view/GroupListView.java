@@ -17,7 +17,7 @@ import javax.swing.*;
 public class GroupListView extends JLabel {
     List<String> codeSnippetsList;
     public DefaultListModel jListModel = new DefaultListModel();
-    public JList<CodeSnippets> jList = new JList<>();
+    public JList<String> jList = new JList<>();
     JScrollPane listJS = new JScrollPane(this.jList);
 
     /* JADX INFO: Access modifiers changed from: package-private */
@@ -52,7 +52,6 @@ public class GroupListView extends JLabel {
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 HomeView.updateCenterListView(GroupListView.this.jList.getSelectedIndex());
-                System.out.println("选中了GroupList:" + GroupListView.this.jList.getSelectedIndex());
             }
         });
     }

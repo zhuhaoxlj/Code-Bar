@@ -2,6 +2,7 @@ package view;
 
 import Snippets.CodeSnippets;
 import net.sf.json.JSONArray;
+import origin.GlobalKeyListener;
 import viewUtils.ResourcesUtils;
 import viewUtils.Style;
 
@@ -160,6 +161,8 @@ public class AddSnippetsView extends JFrame {
                 codeSnippetsArrayList.add(codeSnippets);
 //                writeJSON2Loacl(listToJSONStr(codeSnippetsArrayList), Objects.requireNonNull(ResourcesUtils.getResource("/codesnippets/CodeSnippets.json", "MySnippets", ".json")).getAbsolutePath());
                 writeJSON2Loacl(listToJSONStr(codeSnippetsArrayList), "./CodeSnippets.json");
+                GlobalKeyListener.loadList = codeSnippetsArrayList;
+                HomeView.updateCenterListView(-1);
                 AddSnippetsView.this.dispose();
             }
         });

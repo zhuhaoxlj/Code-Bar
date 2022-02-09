@@ -2,6 +2,7 @@ package view;
 
 
 import Snippets.CodeSnippets;
+import origin.GlobalKeyListener;
 import viewUtils.CenterListCellRender;
 import viewUtils.ResourcesUtils;
 import viewUtils.Style;
@@ -49,8 +50,14 @@ public class CenterCardList extends JLabel {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                System.out.println(CenterCardList.this.jList.getSelectedIndex());
                 HomeView.updateCodeInfo(CenterCardList.this.jList.getSelectedIndex());
+                System.out.println(GlobalKeyListener.nowShowList.size());
+                HomeView.toDeleteID = GlobalKeyListener.nowShowList.get(CenterCardList.this.jList.getSelectedIndex()).getId();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
             }
         });
 //        this.jList.setSelectedIndex(0);
