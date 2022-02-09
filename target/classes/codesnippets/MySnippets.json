@@ -1,0 +1,56 @@
+[
+  {
+    "content": "#include <iostream>\nusing namespace std;\nint main()\n{\n\n  return 0;\n}",
+    "description": "",
+    "languageType": "",
+    "prefix": "main"
+  },
+  {
+    "content": "迷离麻辣\n迷离麻辣\n猴子乱跳",
+    "description": "",
+    "languageType": "",
+    "prefix": "zjj"
+  },
+  {
+    "content": "    /**\n     * 把 JSON 字符串写入本地\n     *\n     * @param jsonText\n     * @param filePath\n     */\n    public void writeJSON2Loacl(String jsonText, String filePath) {\n        try {\n            File file = new File(filePath);\n            // 创建上级目录\n            if (!file.getParentFile().exists()) {\n                file.getParentFile().mkdirs();\n            }\n            // 如果文件存在，则删除文件\n            if (file.exists()) {\n                file.delete();\n            }\n            // 创建文件\n            file.createNewFile();\n            // 写入文件\n            Writer write = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);\n            write.write(jsonText);\n            write.flush();\n            write.close();\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n    }",
+    "description": "",
+    "languageType": "",
+    "prefix": "JSON->Text"
+  },
+  {
+    "content": "    /**\n     * 将文件读取到字符串\n     *\n     * @param filePath 文件路径\n     * @return String 返回文件字符串内容\n     */\n    public static String readFile2String(String filePath) {\n        String fileContent = \"\";\n        //文件逐行读入\n        try {\n            BufferedReader br = new BufferedReader(\n                    new InputStreamReader(\n                            new FileInputStream(filePath)));\n            String linestr;//按行读取 将每次读取一行的结果赋值给linestr\n            while ((linestr = br.readLine()) != null) {\n                fileContent = fileContent + linestr;\n            }\n            br.close();//关闭IO\n        } catch (Exception e) {\n            System.out.println(\"文件操作失败\");\n            e.printStackTrace();\n        }\n        return fileContent;\n    }",
+    "description": "",
+    "languageType": "",
+    "prefix": "Text->String"
+  },
+  {
+    "content": "/**\n  * 保存Bitmap到本地\n  * @param inputStream inputStream\n  */\npublic void saveBitmap(InputStream inputStream){\n    Bitmap mBitmap = BitmapFactory.decodeStream(inputStream);\n    //3.保存Bitmap\n    try {\n        String savePath = getSDCardPath()+\"/AAABBB/\";\n        File temp = new File(savePath);\n        //文件\n        String filepath = savePath + \"/Screen_1.png\";\n        File file = new File(filepath);\n        if (!temp.exists()) {\n            temp.mkdirs();\n        }\n        if (!file.exists()) {\n            file.createNewFile();\n        }\n\n        FileOutputStream fos = null;\n        fos = new FileOutputStream(file);\n        mBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);\n        fos.flush();\n        fos.close();\n        Toast.makeText(this, \"截屏文件已保存至SDCard/AAABBB/下\", Toast.LENGTH_LONG).show();\n\n    } catch (Exception e) {\n        e.printStackTrace();\n    }\n}",
+    "description": "",
+    "languageType": "",
+    "prefix": "bitmap->Png bitmap 保存本地"
+  },
+  {
+    "content": "    public ArrayList<CodeSnippets> convertJSON2CodeSnippets(String jsonContent) {\n        ArrayList<CodeSnippets> codeSnippetsArrayList = new ArrayList<>();\n        JSONArray jsonArray = (JSONArray) JSON.parse(jsonContent);\n        codeSnippetsArrayList = (ArrayList<CodeSnippets>) jsonArray.toJavaList(CodeSnippets.class);\n        return codeSnippetsArrayList;\n    }",
+    "description": "",
+    "languageType": "",
+    "prefix": "JSON->Object"
+  },
+  {
+    "content": "//\n//                            _ooOoo_\n//                           o8888888o\n//                           88\" . \"88\n//                           (| -_- |)\n//                           O\\  =  /O\n//                        ____/`---'\\____\n//                      .'  \\\\|     |//  `.\n//                     /  \\\\|||  :  |||//  \\\n//                    /  _||||| -:- |||||-  \\\n//                    |   | \\\\\\  -  /// |   |\n//                    | \\_|  ''\\---/''  |   |\n//                    \\  .-\\__  `-`  ___/-. /\n//                  ___`. .'  /--.--\\  `. . __\n//               .\"\" '<  `.___\\_<|>_/___.'  >'\"\".\n//              | | :  `- \\`.;`\\ _ /`;.`/ - ` : | |\n//              \\  \\ `-.   \\_ __\\ /__ _/   .-` /  /\n//         ======`-.____`-.___\\_____/___.-`____.-'======\n//                            `=---='\n//        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n//                      Buddha Bless, No Bug !",
+    "description": "",
+    "languageType": "",
+    "prefix": "Buddha bless 佛祖保佑没有BUG"
+  },
+  {
+    "content": "//                       .::::.\n//                     .::::::::.\n//                    :::::::::::\n//                 ..:::::::::::'\n//              '::::::::::::'\n//                .::::::::::\n//           '::::::::::::::..\n//                ..::::::::::::.\n//              ``::::::::::::::::\n//               ::::``:::::::::'        .:::.\n//              ::::'   ':::::'       .::::::::.\n//            .::::'      ::::     .:::::::'::::.\n//           .:::'       :::::  .:::::::::' ':::::.\n//          .::'        :::::.:::::::::'      ':::::.\n//         .::'         ::::::::::::::'         ``::::.\n//     ...:::           ::::::::::::'              ``::.\n//    ```` ':.          ':::::::::'                  ::::..\n//                       '.:::::'                    '\\:'````..\n//\n//",
+    "description": "",
+    "languageType": "",
+    "prefix": "beauty 美女~"
+  },
+  {
+    "content": "测试",
+    "description": "",
+    "languageType": "",
+    "prefix": "test"
+  }
+]
