@@ -163,6 +163,7 @@ public class AddSnippetsView extends JFrame {
                 writeJSON2Loacl(listToJSONStr(codeSnippetsArrayList), "./CodeSnippets.json");
                 GlobalKeyListener.loadList = codeSnippetsArrayList;
                 HomeView.updateCenterListView(-1);
+                HomeView.updateGroupListView();
                 AddSnippetsView.this.dispose();
             }
         });

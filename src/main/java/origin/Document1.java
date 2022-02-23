@@ -63,6 +63,7 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
             // caretUpdate.
             // It will then pass the event to the update method including the source of the
             // event (which is our textarea control)
+            @Override
             public void caretUpdate(CaretEvent e) {
                 JTextArea editArea = (JTextArea) e.getSource();
 
