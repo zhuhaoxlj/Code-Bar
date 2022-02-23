@@ -21,7 +21,6 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
-import java.util.jar.JarEntry;
 
 
 public class HomeView extends JFrame implements ActionListener, DocumentListener {
@@ -29,7 +28,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
     public boolean isDraging;
     private int xx;
     private int yy;
-    private boolean isHideOnTray = false;
+    private boolean isHideOnTray = true;
     // 左边代码片段分组列表
     public static List<String> groupNameList;
     public static JLabel windowFrame;
@@ -589,7 +588,6 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         minimizeButton.setIcon(icon1);
         maximizeButton.setIcon(icon2);
         closeButton.setIcon(icon3);
-
         minimizeButton.setBounds(
                 840, 21, 18, 18);
         maximizeButton.setBounds(
@@ -757,7 +755,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
 
         // 默认选择全部代码片段
         updateCenterListView(-1);
-        this.setVisible(true);
+        systemTray();
     }
 
     public String listToJSONStr(List<CodeSnippets> codeSnippetsList) {
@@ -950,12 +948,17 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
             MenuItem itemExit = new MenuItem("退出程序");
             MenuItem aboutMe = new MenuItem("关于");
             MenuItem showMainActivity = new MenuItem("显示主程序");
+            MenuItem update = new MenuItem("更新");
             itemExit.addActionListener(e -> System.exit(0));
             showMainActivity.addActionListener(e -> HomeView.this.setVisible(true));
             aboutMe.addActionListener(e -> System.out.println("MarkGosling yyds"));
+            update.addActionListener(e->{
+                new UpdateView();
+            });
             Font f = new Font("黑体", Font.PLAIN, 11);//宋体
             itemExit.setFont(f);
             popupMenu.add(showMainActivity);
+            popupMenu.add(update);
             popupMenu.add(aboutMe);
             popupMenu.add(itemExit);
             //创建托盘图标

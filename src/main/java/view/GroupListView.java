@@ -13,6 +13,8 @@ import java.util.Objects;
 import javax.swing.*;
 
 
+
+
 /* loaded from: KaChat_Client.jar:cn/com/view/MainChatCard.class */
 public class GroupListView extends JLabel {
     List<String> codeSnippetsList;
