@@ -128,16 +128,13 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
         edit.setMnemonic('E');
 
         cut = new JMenuItem("剪切");
-        cut.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                textArea.cut();
-            }
-        });
+        cut.addActionListener(e -> textArea.cut());
         cut.setMnemonic('T');
         edit.add(cut);
 
         copy = new JMenuItem("复制");
         copy.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.copy();
             }
@@ -147,6 +144,7 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
 
         paste = new JMenuItem("粘贴");
         paste.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.paste();
             }
@@ -161,6 +159,7 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
 
         sall = new JMenuItem("选择全部");
         sall.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.selectAll();
             }
@@ -172,6 +171,7 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
 
         font = new JMenuItem("字体");
         font.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFontDialog fontDialog = new JFontDialog();
                 fontDialog.setVisible(true);
@@ -187,8 +187,9 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
 
         showstatus = new JMenuItem("状态栏");
         showstatus.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if (toolBarEnable == true) {
+                if (toolBarEnable) {
                     toolBar.setVisible(false);
                     toolBarEnable = false;
 
@@ -204,6 +205,7 @@ public class Document1 extends JFrame implements ActionListener, DocumentListene
 
         about = new JMenuItem("关于");
         about.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Text Editor in Java. \n\n 2021", "Text Editor", 1);
             }

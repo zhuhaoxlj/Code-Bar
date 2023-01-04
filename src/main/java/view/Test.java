@@ -6,13 +6,15 @@ package view;
  */
 public class Test {
     public static void main(String[] args) {
-        enum INTENTCODE {
-            PROFILE(1),
-            NICKNAME(2);
-
-            INTENTCODE(int i) {
+        int count = 0;
+        int i,j,k;
+        for (i=1; i <= 10; i++) {
+            for (j=1; j <= i; j++) {
+                for (k=1; k <= j; k++) {
+                    count += 1;
+                }
             }
         }
-        System.out.println(INTENTCODE.PROFILE);
+        System.out.println(count);
     }
 }

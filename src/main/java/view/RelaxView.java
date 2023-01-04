@@ -22,7 +22,6 @@ public class RelaxView extends JFrame {
         Icon jframeIcon = new ImageIcon(Objects.requireNonNull(ResourcesUtils.getResource("/img/relaxView/jframe.png", "codesnippets", ".png")).getAbsolutePath());
         jframe.setIcon(jframeIcon);
         jframe.setBounds(0, 0, 695, 461);
-
         // 窗体控制按钮
         JLabel minimizeButton = new JLabel();
         JLabel maximizeButton = new JLabel();
