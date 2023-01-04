@@ -4,7 +4,7 @@
 
 <h2 align="center">Code Bar - 代码片段管理工具</h2> 
 
-README [English]() | 中文
+README [English](https://github.com/zhuhaoxlj/Code-Bar) | 中文
 
 ## 状态
 
