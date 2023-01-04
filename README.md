@@ -4,7 +4,7 @@
 
 <h2 align="center">Code Bar - Code snippet management tool</h2> 
 
-README English | [Chinese]()
+README English | [Chinese](https://github.com/zhuhaoxlj/Code-Bar/blob/master/README-CN.md)
 
 ## Status
 
