@@ -16,10 +16,10 @@ Code Bar is a tool that allows you to quickly search and use frequently used cod
 
 ### Project schedule
 
-- [x] 加入定时休息提醒
-- [x] 加入 tag 实现快速输入
-- [ ] PySide6 重制
-- [ ] 代码片段云同步
+- [x] Add regular rest reminder
+- [x] Add tag to realize fast input
+- [ ] PySide6 Remake Version
+- [ ] Code snippet cloud synchronization
 
 ### Project preview
 
