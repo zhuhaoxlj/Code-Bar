@@ -25,7 +25,7 @@ Code Bar is a tool that allows you to quickly search and use frequently used cod
 
 
 
-![软件主界面](https://markgosling.oss-cn-beijing.aliyuncs.com/img/202301041718683.png)
+![软件主界面](https://markgosling.oss-cn-beijing.aliyuncs.com/img/202306301407120.png)
 
 
 
