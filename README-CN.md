@@ -25,7 +25,7 @@ Code Bar 是一款可以快速搜索调用常用代码片段的工具，同时�
 
 
 
-![软件主界面](https://markgosling.oss-cn-beijing.aliyuncs.com/img/202301041718683.png)
+![软件主界面](https://markgosling.oss-cn-beijing.aliyuncs.com/img/202306301407120.png)
 
 
 
