@@ -30,6 +30,8 @@ buildNumber.properties
 
 # Mac
 .DS_Store
+.AppleDouble
+.LSOverride
 
 # Package Files #
 *.jar
@@ -41,4 +43,19 @@ buildNumber.properties
 *.rar
 
 # virtual machine crash logs
-hs_err_pid* 
+hs_err_pid*
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# VS Code
+.vscode/ 

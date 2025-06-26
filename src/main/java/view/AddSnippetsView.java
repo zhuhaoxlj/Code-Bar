@@ -274,7 +274,7 @@ public class AddSnippetsView extends JFrame {
             // 创建文件
             file.createNewFile();
             // 写入文件
-            Writer write = new OutputStreamWriter(new FileOutputStream(file), "GBK");
+            Writer write = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
             write.write(jsonText);
             write.flush();
             write.close();

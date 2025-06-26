@@ -21,6 +21,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 
 public class HomeView extends JFrame implements ActionListener, DocumentListener {
@@ -841,7 +842,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
             // 创建文件
             file.createNewFile();
             // 写入文件
-            Writer write = new OutputStreamWriter(new FileOutputStream(file), "GBK");
+            Writer write = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
             write.write(jsonText);
             write.flush();
             write.close();
@@ -929,7 +930,7 @@ public class HomeView extends JFrame implements ActionListener, DocumentListener
         Set<String> tempSet = new HashSet<>();
         for (CodeSnippets temp : GlobalKeyListener.loadList) {
             String group = temp.getGroup();
-            if (!group.equals("")) {
+            if (group != null && !group.equals("")) {
                 tempSet.add(group);
             }
         }
